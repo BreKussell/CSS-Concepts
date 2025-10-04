@@ -1,0 +1,228 @@
+h1 {
+  font-size: 4em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h2 {
+  color: #fff;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #EC5800;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em; 
+}
+
+.center-content h1,
+.center-content h2,
+.center-content button {
+  margin: 0;
+  color: #fff;
+}
+
+.bar {
+  background-color: #fff;
+  color:#EC5800;
+  border: solid 1px #EC5800;
+  text-align: center;
+  top: 10%;
+  position: absolute;
+  display: block;
+  width: 100%;
+}
+
+section {
+  height: 100dvh;
+
+  /* base layered backgrounds */
+  background: 
+    radial-gradient(circle at top center, rgba(255, 255, 200, 0.35) 0%, transparent 40%),
+    linear-gradient(0deg, rgba(25, 10, 40, 1) 0%, rgba(22, 75, 125, 1) 40%, rgba(42, 183, 225, 1) 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  border-radius: 50px;
+  
+
+  /* custom shape */
+  clip-path: polygon(
+      0% 0%, /* top-left corner */
+      30% 0%, /* move to left side of cut-in */
+      35% 8%, /* angled down into cut-in */
+      65% 8%, /* flat bottom of cut-in */
+      70% 0%, /* angled back up */
+      100% 0%, /* top-right corner */
+      100% 100%, /* bottom-right */
+      0% 100% /* bottom-left */ 
+  );
+
+  /* sunlight glow animation */
+  animation: sunlightGlow 8s ease-in-out infinite;
+}
+
+@keyframes sunlightGlow {
+  0%, 100% {
+    background-size: 100% 110%, cover;
+  }
+  50% {
+    background-size: 150% 150%, cover;
+  }
+}
+
+
+
+
+/*Card Styles*/
+.card {
+    position: absolute; /*temporary*/
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 5px;
+    width: 10%;
+    margin: auto;
+    animation: float 8s ease-in-out infinite;
+    display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1.5fr 0.2fr 1.5fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "icon title-status"
+    "percentage percentage"
+    "stats stats"; 
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+
+}
+
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(
+        to bottom left,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+}
+
+.card h3,
+.card p {
+    color: #fff; 
+}
+
+.card:hover {
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+}
+
+/*Card Posistions Temporary for now*/
+#card1 {
+     top: 10%; 
+     left: 15%; 
+     z-index: 2; 
+     animation-delay: 0s;
+    }
+
+#card2 { 
+    top: 25%; 
+    left: 70%; 
+    z-index: 3;
+    animation-delay: 1.5s; 
+ }
+
+#card3 { 
+    top: 60%; 
+    left: 30%; 
+    z-index: 4;
+    animation-delay: 0.4s;
+ }
+
+#card4 { 
+    top: 75%; 
+    left: 65%; 
+    z-index: 5; 
+    animation-delay: 0.8s; 
+}
+
+#card5 { 
+    top: 40%; 
+    left: 10%; 
+    z-index: 6; 
+    animation-delay: 0s; 
+}
+
+#card6 { 
+    top: 15%; 
+    left: 80%; 
+    z-index: 7;
+    animation-delay: 0.9s; 
+}
+
+#card7 { 
+    top: 70%; 
+    left: 55%; 
+    z-index: 8; 
+    animation-delay: 0.6s;
+}
+
+#card8 { 
+    top: 35%; 
+    left: 60%; 
+    z-index: 9;
+    animation-delay: 0.7s; 
+}
+
+#card9 { 
+    top: 75%; 
+    left: 20%; 
+    z-index: 10;
+    animation-delay: 0.2s; 
+}
+
+
