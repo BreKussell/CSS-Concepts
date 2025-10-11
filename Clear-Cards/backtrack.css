@@ -1,0 +1,62 @@
+#card1 {
+     top: 10%; 
+     left: 15%; 
+     z-index: 2; 
+     animation-delay: 0s;
+    }
+
+#card2 { 
+    top: 25%; 
+    left: 70%; 
+    z-index: 3;
+    animation-delay: 1.5s; 
+ }
+
+#card3 { 
+    top: 60%; 
+    left: 30%; 
+    z-index: 4;
+    animation-delay: 0.4s;
+ }
+
+#card4 { 
+    top: 75%; 
+    left: 65%; 
+    z-index: 5; 
+    animation-delay: 0.8s; 
+}
+
+#card5 { 
+    top: 40%; 
+    left: 10%; 
+    z-index: 6; 
+    animation-delay: 0s; 
+}
+
+#card6 { 
+    top: 15%; 
+    left: 80%; 
+    z-index: 7;
+    animation-delay: 0.9s; 
+}
+
+#card7 { 
+    top: 70%; 
+    left: 55%; 
+    z-index: 8; 
+    animation-delay: 0.6s;
+}
+
+#card8 { 
+    top: 35%; 
+    left: 60%; 
+    z-index: 9;
+    animation-delay: 0.7s; 
+}
+
+#card9 { 
+    top: 75%; 
+    left: 20%; 
+    z-index: 10;
+    animation-delay: 0.2s; 
+}
