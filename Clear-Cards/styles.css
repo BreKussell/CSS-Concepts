@@ -140,7 +140,7 @@ section {
   );
 
   /* sunlight glow animation */
-  animation: sunlightGlow 8s ease-in-out infinite;
+  animation: sunlightGlow 8m ease-in-out infinite;
 }
 
 @keyframes sunlightGlow {
@@ -154,11 +154,11 @@ section {
 =========================== */
 .card-container {
   position: relative;
-  margin-top: 80px;
+  margin-top: 10px;
 }
 
 .card {
-  position: absolute; 
+  position: fixed;
   width: 10%;
   margin: auto;   
   padding: 5px;
@@ -169,7 +169,7 @@ section {
   grid-template-areas: 
     "icon title-status"
     "percentage percentage"
-    "stats stats";  
+    "status status";  
 
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -178,7 +178,7 @@ section {
   color: #fff;
   cursor: pointer; 
   overflow: hidden; 
-animation: float 4s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+  animation: float 4s cubic-bezier(0.7, 0, 0.4, 1) infinite alternate;
 }
 
 @keyframes float {
@@ -196,10 +196,10 @@ animation: float 4s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
   width: 50%;
   height: 100%;
   background: linear-gradient(
-    to right,
+    to bottom right,
     rgba(255, 255, 255, 0) 0%,
     rgba(255, 255, 255, 0.4) 50%,
-    rgba(255, 255, 255, 0) 100%
+    rgba(255, 255, 255, 0.2) 100%
   );
   transform: skewX(-20deg);
   pointer-events: none;
@@ -215,20 +215,15 @@ animation: float 4s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
   100% { left: 120%; }
 }
 
-/* Glassy gradient overlay */
 .card::after {
   content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(
-    to bottom left,
-    rgba(255, 255, 255, 0.05),
-    transparent
-  );
+  grid-area: icon;
+  background-image: url('icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px;
+  border-radius: 10px;
 }
 
 
