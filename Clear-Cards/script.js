@@ -4,13 +4,13 @@ window.addEventListener("mousemove", (e) => {
   const x = e.clientX / window.innerWidth; // 0 → 1
   const percent = x * 100;
 
-  // Fixed width for the orange band
-  const bandWidth = 15; // percentage width of the orange band
+  // Width of the orange/yellow band
+  const bandWidth = 15;
 
   let start = percent - bandWidth / 2;
   let end = percent + bandWidth / 2;
 
-  // Clamp values to stay within 0–100%
+  // Clamp to 0–100%
   if (start < 0) {
     end -= start;
     start = 0;
@@ -20,11 +20,12 @@ window.addEventListener("mousemove", (e) => {
     end = 100;
   }
 
+  // Use soft transitions: fade from blue → yellow → purple
   bar.style.background = `linear-gradient(90deg,
     blue 0%,
-    blue ${start}%,
-    orange ${start}%,
+    blue ${start - 10}%,
+    yellow ${start}%,
     orange ${end}%,
-    purple ${end}%,
+    purple ${end + 10}%,
     purple 100%)`;
 });
