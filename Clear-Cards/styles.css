@@ -401,3 +401,32 @@ section {
   transition: background 0.2s linear;
   z-index: 11;
 }
+
+/* ===========================
+   Mobile Responsive
+=========================== */
+@media (max-width: 768px) {
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* spacing between cards */
+    margin-top: 20px;
+  }
+
+  .card {
+    position: relative; 
+    width: 90%;          
+    max-width: 350px;    
+    margin: 0 auto;
+    animation: none;     
+    transform: none;  
+  }
+
+  #card1, #card2, #card3, #card4, 
+  #card5, #card6, #card7, #card8, 
+  #card9, #card10, #card11 {
+    top: auto;
+    left: auto;
+  }
+}

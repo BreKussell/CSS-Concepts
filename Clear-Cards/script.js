@@ -54,7 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (percent === 100) {
           fill.style.background = "green";
-        } else if (percent > 50) {
+        } else if (percent < 50) {
           fill.style.background = "red";
         } else {
           fill.style.background = "blue";
