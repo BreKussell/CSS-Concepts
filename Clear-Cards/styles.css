@@ -377,7 +377,7 @@ section {
 =========================== */
 #card1  { top: calc(15% + 50px); left: 12%;  animation-delay: 0.1s; }
 #card2  { top: calc(30% + 50px); left: 75%;  animation-delay: 1.0s; }
-#card3  { top: calc(65% + 50px); left: 20%;  animation-delay: 0.4s; }
+#card3  { top: calc(55% + 50px); left: 20%;  animation-delay: 0.4s; }
 #card4  { top: calc(60% + 50px); left: 60%;  animation-delay: 0.8s; }
 #card5  { top: calc(48% + 50px); left: 5%;   animation-delay: 0s; }
 #card6  { top: calc(18% + 50px); left: 85%;  animation-delay: 1.2s; }
