@@ -13,65 +13,36 @@ h2 {
 
 
 /* ===========================
-   Buttons
-=========================== */
-button {
-  position: relative;   
-  overflow: hidden;     
-  padding: 15px 30px;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(to bottom, #EC5800, #ff6600);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  color: white;
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-/* Shine overlay */
-button::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit; 
-  pointer-events: none;
-
-  /* White radial shine */
-  background: radial-gradient(
-    circle at bottom left,
-    rgba(255, 255, 255, 0.6) 0%,
-    rgba(255, 255, 255, 0.2) 30%,
-    rgba(255, 255, 255, 0) 70%
-  );
-}
-
-/* ===========================
    Navigation
 =========================== */
 .top-nav {
   position: absolute;
-  top: 0;            
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
   display: flex;
-  gap: 2em;
-  padding: 20px 0;   
-  z-index: 10;     
+  padding: 5px;
+  z-index: 10;
 }
 
 .top-nav a {
-  color: #EC5800;        
+  color: #EC5800;
   font-weight: bold;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1em;
   transition: color 0.2s;
 }
 
 .top-nav a:hover {
-  color: #ff7b33;       
+  color: #ff7b33;
+}
+
+.top-nav::before {
+  content: "";
+  position: absolute;
+  background-image: url("icon.png");
+  background-size: contain;
+  width: 20px;
+  z-index: 10;
 }
 
 
@@ -88,7 +59,7 @@ button::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em; 
+  gap: 1em;
 }
 
 .center-content h1,
@@ -104,10 +75,95 @@ button::before {
   display: block;
   width: 100%;
   text-align: center;
-
   background-color: #fff;
   color: #EC5800;
   border: solid 1px #EC5800;
+}
+
+
+/* ===========================
+   Buttons
+=========================== */
+.center-content button {
+  position: relative;
+  overflow: hidden;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(to bottom, #EC5800, #ff6600);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.center-content button:hover {
+  z-index: 999;
+}
+
+/* Shine overlay */
+.center-content button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.2) 30%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+/* Connect button */
+.connect-button {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  width: 160px;
+  height: 50px;
+  background: #fff;
+  clip-path: polygon(
+    20% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%, 0% 20%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-left: 45px;
+}
+
+.connect-button button {
+  width: 75%;
+  height: 65%;
+  background: rgb(22, 75, 125);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  color: #fff;
+  clip-path: polygon(
+    15% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%, 0% 15%
+  );
+}
+
+/* Compass icon */
+.connect-button::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  width: 24px;
+  height: 24px;
+  background-image: url("compass.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 
@@ -120,26 +176,17 @@ section {
   overflow: hidden;
   border-radius: 50px;
 
-  /* base layered backgrounds */
   background: 
     radial-gradient(circle at top center, rgba(255, 255, 200, 0.35) 0%, transparent 40%),
     linear-gradient(0deg, rgba(25, 10, 40, 1) 0%, rgba(22, 75, 125, 1) 40%, rgba(42, 183, 225, 1) 100%);
   background-repeat: no-repeat;
   background-size: cover;
 
-  /* custom shape */
   clip-path: polygon(
-      0% 0%, 
-      30% 0%, 
-      35% 8%, 
-      65% 8%, 
-      70% 0%, 
-      100% 0%, 
-      100% 100%, 
-      0% 100%
+    0% 0%, 30% 0%, 35% 8%, 65% 8%, 70% 0%, 
+    100% 0%, 100% 100%, 0% 100%
   );
 
-  /* sunlight glow animation */
   animation: sunlightGlow 8s ease-in-out infinite;
 }
 
@@ -154,46 +201,52 @@ section {
 =========================== */
 .card-container {
   position: relative;
+  overflow: hidden;
   margin-top: 10px;
   height: 100%;
 }
 
 .card {
   position: absolute;
-  width: 10%;
-  margin: auto;   
+  width: 220px;
+  min-height: 260px;
+  margin: 10px auto;
   padding: 5px;
+  z-index: 1;
 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  grid-template-rows: 1.5fr 0.2fr 1.5fr; 
-  grid-template-areas: 
-    "icon title-status"
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 0.1 auto;
+  grid-template-areas:
+    "icon title-open-closed"
     "percentage percentage"
-    "status status";  
+    "offer offer";
+  gap: 0;
 
   background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 10px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(3px);
   color: #fff;
-  cursor: pointer; 
-  overflow: hidden; 
+  cursor: pointer;
+  overflow: hidden;
+
   animation: float 4s cubic-bezier(0.7, 0, 0.4, 1) infinite alternate;
+  transition: transform 0.5s ease, z-index 0.5s;
 }
 
 @keyframes float {
   from { transform: translate(0, 0); }
-  to   { transform: translate(15px, -10px); }
+  to   { transform: translate(10px, -6px); }
 }
-
 
 /* Shine overlay */
 .card::before {
   content: "";
   position: absolute;
   top: 0;
-  left: -60%;   
+  left: -60%;
   width: 50%;
   height: 100%;
   background: linear-gradient(
@@ -206,7 +259,12 @@ section {
   pointer-events: none;
 }
 
-/* Shine on hover */
+.card:hover {
+  z-index: 999;
+  transform: scale(1.05);
+  backdrop-filter: blur(30px);
+}
+
 .card:hover::before {
   animation: card-shine 1s forwards;
 }
@@ -220,37 +278,126 @@ section {
   content: "";
   grid-area: icon;
   background-image: url('icon.png');
+  width: 80px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 50px;
+}
+
+
+/* ===========================
+   Card Content Areas
+=========================== */
+.title-open-closed {
+  grid-area: title-open-closed;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "title title"
+    "open closed";
+  gap: 6px;
+  justify-items: center;
+  align-items: center;
+}
+
+.title { 
+  grid-area: title;
+  text-align: center;
+}
+
+.open, .closed {
+  width: 100%;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.open.active, .closed.active {
+  background: #28a745;
+  color: #fff;
+  border-color: #28a745;
+}
+
+.open:hover:not(.active),
+.closed:hover:not(.active) {
+  background: rgba(255,255,255,0.1);
+}
+
+.percentage {
+  grid-area: percentage;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,0.1);
   border-radius: 10px;
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: blue;
+  border-radius: 10px;
+  transition: width 0.8s ease-in-out, background 0.4s;
+}
+
+.progress-text {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.offer {
+  grid-area: offer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.offer table {
+  margin: auto;
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
 }
 
 
 /* ===========================
    Card Positions
 =========================== */
-#card1 { top: calc(15% + 100px); left: 8%;  z-index: 2; animation-delay: 0s; }
-#card2 { top: calc(30% + 100px); left: 75%; z-index: 3; animation-delay: 1.0s; }
-#card3 { top: calc(65% + 100px); left: 20%; z-index: 4; animation-delay: 0.4s; }
-#card4 { top: calc(78% + 100px); left: 60%; z-index: 5; animation-delay: 0.8s; }
-#card5 { top: calc(45% + 100px); left: 5%;  z-index: 6; animation-delay: 0s; }
-#card6 { top: calc(18% + 100px); left: 85%; z-index: 7; animation-delay: 1.2s; }
-#card7 { top: calc(72% + 100px); left: 50%; z-index: 8; animation-delay: 0.6s; }
-#card8 { top: calc(40% + 100px); left: 55%; z-index: 9; animation-delay: 0.7s; }
-#card9 { top: calc(82% + 100px); left: 35%; z-index: 10; animation-delay: 0.2s; }
+#card1  { top: calc(15% + 50px); left: 12%;  animation-delay: 0.1s; }
+#card2  { top: calc(30% + 50px); left: 75%;  animation-delay: 1.0s; }
+#card3  { top: calc(65% + 50px); left: 20%;  animation-delay: 0.4s; }
+#card4  { top: calc(60% + 50px); left: 60%;  animation-delay: 0.8s; }
+#card5  { top: calc(48% + 50px); left: 5%;   animation-delay: 0s; }
+#card6  { top: calc(18% + 50px); left: 85%;  animation-delay: 1.2s; }
+#card7  { top: calc(52% + 50px); left: 50%;  animation-delay: 0.5s; }
+#card8  { top: calc(10% + 50px); left: 65%;  animation-delay: 0.7s; }
+#card9  { top: calc(8% + 50px);  left: 30%;  animation-delay: 0.2s; }
+#card10 { top: calc(26% + 50px); left: 62%;  animation-delay: 0.5s; }
+#card11 { top: calc(30% + 50px); left: 0%;   animation-delay: 0s; }
+
 
 /* ===========================
    Gradient Bar
 =========================== */
 .gradient-bar {
-  position: absolute;  
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 8px;
   background: linear-gradient(90deg, blue, yellow, purple);
   transition: background 0.2s linear;
-  z-index: 11; 
+  z-index: 11;
 }

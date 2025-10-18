@@ -29,3 +29,36 @@ window.addEventListener("mousemove", (e) => {
     purple ${end + 10}%,
     purple 100%)`;
 });
+
+
+window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".card").forEach(card => {
+      
+      //Active Button 
+      const buttons = card.querySelectorAll(".open, .closed");
+      if (buttons.length) {
+        const randomIndex = Math.floor(Math.random() * buttons.length);
+        buttons.forEach((btn, i) => {
+          btn.classList.toggle("active", i === randomIndex);
+        });
+      }
+
+      //Percentage Bar 
+      const fill = card.querySelector(".progress-fill");
+      const text = card.querySelector(".progress-text");
+      if (fill && text) {
+        const percent = Math.floor(Math.random() * 101);
+        
+        fill.style.width = percent + "%";
+        text.textContent = percent + "%";
+
+        if (percent === 100) {
+          fill.style.background = "green";
+        } else if (percent > 50) {
+          fill.style.background = "red";
+        } else {
+          fill.style.background = "blue";
+        }
+      }
+    });
+  });
