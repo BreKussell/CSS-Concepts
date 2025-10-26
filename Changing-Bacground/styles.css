@@ -1,0 +1,355 @@
+/* ===========================
+   Root Variables
+=========================== */
+:root {
+  /* Fonts */
+  --font-heading: 'Uncial Antiqua', cursive;
+  --font-body: 'IM Fell English SC', serif;
+
+  /* Colors */
+  --color-brown-dark: #8b5a2b;
+  --color-brown-light: #ccb37e;
+  --color-scroll-light: #f4e2c5;
+  --color-scroll-dark: #e9d8a6;
+  --color-scroll-text: #3a2f0b;
+
+  --color-sunset1: rgba(255,120,50,0.8);
+  --color-sunset2: rgba(255,80,20,0.6);
+  --color-sunset3: rgba(20,0,40,0);
+
+  --color-sunset-overlay1: rgba(255,150,50,0.4);
+  --color-sunset-overlay2: rgba(255,200,120,0.2);
+
+  --color-night1: #0b0d24;
+  --color-night2: #1a1d3a;
+
+  --color-sun-glow: rgba(255,230,100,0.8);
+  --color-sun-glow-strong: rgba(255,240,150,1);
+  --color-moon-glow: rgba(200,200,255,0.8);
+
+  /* Shadows */
+  --shadow-strong: 0 6px 12px rgba(0,0,0,0.4);
+  --shadow-medium: 0 12px 24px rgba(0,0,0,.22);
+  --shadow-inset-light: inset 0 20px 30px rgba(0,0,0,.08);
+  --shadow-inset-dark: inset 0 -20px 25px rgba(0,0,0,.06);
+
+  /* Sizes */
+  --scroll-height: 300px;
+  --scroll-roll: 40px;
+  --sun-size: 120px;
+  --moon-width: 150px;
+  --moon-height: 100px;
+}
+
+/* ===========================
+   General Styles
+=========================== */
+section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}
+
+/* ===========================
+   Shared Panel Styles
+=========================== */
+.slide-left,
+.scroll {
+  display: flex;
+  font-size: 2em;
+  padding: 2em;
+  width: 60%;
+  margin: auto;
+  z-index: 4;
+  box-shadow: var(--shadow-strong);
+}
+
+/* =========================
+   Scroll Panel
+============================ */
+.scroll {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  height: 0;
+  padding: 40px 48px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  color: var(--color-scroll-text);
+
+  background: linear-gradient(
+    to bottom,
+    var(--color-scroll-light),
+    var(--color-scroll-dark) 80%
+  );
+  background-blend-mode: overlay;
+  background-clip: content-box;
+
+  box-shadow:
+    inset 0 0 0 2px rgba(146,120,74,.3),
+    var(--shadow-inset-light),
+    var(--shadow-inset-dark),
+    var(--shadow-medium);
+
+  animation: unroll 1.5s ease-out forwards;
+}
+
+/* Rolled bars (top & bottom) */
+.scroll::before,
+.scroll::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--scroll-roll);
+  pointer-events: none;
+
+  background: linear-gradient(to right,
+    var(--color-brown-dark) 0 48px,
+    var(--color-brown-light) 48px calc(100% - 48px),
+    var(--color-brown-dark) calc(100% - 48px) 100%
+  );
+}
+
+.scroll::before {
+  top: 0;
+  border-radius: 999px / 50%;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,.25),
+    inset 0 -6px 10px rgba(0,0,0,.15);
+}
+
+.scroll::after {
+  bottom: 0;
+  border-radius: 999px / 50%;
+  box-shadow:
+    0 -4px 10px rgba(0,0,0,.22),
+    inset 0 6px 10px rgba(0,0,0,.14);
+}
+
+/* =========================
+   Sign Panel
+=========================== */
+.slide-left {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: var(--color-brown-dark);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.05) 0px,
+    rgba(255,255,255,0.05) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+
+  clip-path: polygon(
+    0 0, 20% 15%, 0 15%, 0 100%,
+    95% 100%, 100% 90%, 100% 0
+  );
+
+  animation: slideLeft 1s ease-out forwards;
+}
+
+/* ===========================
+   Background Styles
+=========================== */
+.background {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 0;
+}
+
+.town {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40vh;
+  z-index: 3;
+  object-fit: contain;
+  transform: translateY(40px);
+  opacity: 0;
+  animation: townParallaxIn 2s ease-out forwards;
+}
+
+/* ===========================
+   Sunrise / Sunset
+=========================== */
+#sunset {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+#sunset .stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+#sunset::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse at bottom,
+    var(--color-sunset1) 0%,
+    var(--color-sunset2) 40%,
+    var(--color-sunset3) 100%
+  );
+}
+
+#sunset .town {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+  z-index: 3;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+#sunset .town::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    var(--color-sunset-overlay1),
+    var(--color-sunset-overlay2)
+  );
+}
+
+/* ===========================
+   Day
+=========================== */
+#day {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#day .sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+  opacity: 0.95;
+}
+
+#day .sun {
+  position: absolute;
+  top: 10%;
+  left: 70%;
+  width: var(--sun-size);
+  height: var(--sun-size);
+  z-index: 2;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px var(--color-sun-glow));
+  animation: pulseSun 6s infinite ease-in-out;
+}
+
+#day .town {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  object-fit: cover;
+}
+
+/* ===========================
+   Night
+=========================== */
+#night {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(to top, var(--color-night1) 0%, var(--color-night2) 100%);
+}
+
+#night .stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+#night .moon {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: var(--moon-width);
+  height: var(--moon-height);
+  z-index: 2;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px var(--color-moon-glow));
+}
+
+#night .town {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  object-fit: cover;
+  filter: brightness(25%);
+}
+
+/* ===========================
+   Animations
+=========================== */
+@keyframes unroll {
+  from { height: 0; }
+  to   { height: var(--scroll-height); }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes pulseSun {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 25px var(--color-sun-glow));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 40px var(--color-sun-glow-strong));
+  }
+}
+
+@keyframes townParallaxIn {
+  0%   { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
