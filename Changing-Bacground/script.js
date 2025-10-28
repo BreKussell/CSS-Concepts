@@ -8,7 +8,7 @@ function updateBackground() {
   document.getElementById("night").style.display = "none";
 
   // Logic for showing correct background
-  if ((hour >= 5 && hour < 8) || (hour >= 17 && hour < 20)) {
+  if ((hour >= 5 && hour < 8) || (hour >= 17 && hour < 20)) { 
     document.getElementById("sunset").style.display = "block";
   } else if (hour >= 8 && hour < 17) {
     document.getElementById("day").style.display = "block";
