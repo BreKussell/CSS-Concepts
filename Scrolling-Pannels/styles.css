@@ -1,0 +1,124 @@
+/* ===========================
+   Root Variables
+=========================== */
+:root {
+  --bg-dark: #0b0b0b;
+  --border-white: rgba(255, 255, 255, 0.6);
+  --radius: 18px;
+  --text-light: #fff;
+}
+
+/* ===========================
+   Base Grid Layout
+=========================== */
+body {
+  margin: 0;
+  background: var(--bg-dark);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 1fr 1fr;
+  gap: 0;
+  grid-template-areas:
+    "navBar navBar navBar"
+    "roy pair agitha"
+    "zoom zoom zoom";
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===========================
+   Navigation Bar
+=========================== */
+.navBar {
+  grid-area: navBar;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 3em;
+  position: relative;
+  z-index: 10;
+}
+
+.navBar .logo h2 {
+  margin: 0;
+}
+
+.navBar nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.navBar a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navBar button {
+  background: none;
+  border: 1px solid var(--border-white);
+  border-radius: 30px;
+  color: var(--text-light);
+  padding: 0.4em 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navBar button:hover {
+  background: var(--text-light);
+  color: var(--bg-dark);
+}
+
+/* ===========================
+   Panel Section
+=========================== */
+.pannel-section {
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+  display: contents; 
+}
+
+.panel {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--border-white);
+  border-radius: var(--radius);
+}
+
+/* Each grid area */
+.roy   { grid-area: roy; }
+.pair  { grid-area: pair; }
+.agitha{ grid-area: agitha; }
+
+
+
+/* ===========================
+   Panel Text Overlay
+=========================== */
+.pannel-text {
+  position: absolute;
+  bottom: 10%;
+  right: 8%;
+  text-align: right;
+  z-index: 5;
+}
+
+.pannel-text h1 {
+  font-size: 4em;
+  margin: 0;
+}
+
+.pannel-text p {
+  font-size: 1.2em;
+  opacity: 0.8;
+}
+
+/* ===========================
+   Zoom Section (hidden)
+=========================== */
+.zoom {
+  grid-area: zoom;
+  display: none;
+}

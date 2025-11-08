@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Uncial+Antiqua&display=swap');
+
 /* ===========================
    Root Variables
 =========================== */
@@ -12,6 +14,7 @@
   --color-scroll-light: #f4e2c5;
   --color-scroll-dark: #e9d8a6;
   --color-scroll-text: #3a2f0b;
+  --color-hover: #50993e;
 
   --color-sunset1: rgba(255,120,50,0.8);
   --color-sunset2: rgba(255,80,20,0.6);
@@ -34,7 +37,7 @@
   --shadow-inset-dark: inset 0 -20px 25px rgba(0,0,0,.06);
 
   /* Sizes */
-  --scroll-height: 300px;
+  --scroll-height: 350px;
   --scroll-roll: 40px;
   --sunMoon-width: 150px;
   --sunMoon-height: 150px;
@@ -81,6 +84,9 @@ h1, h2, h3 {
   padding: 40px 48px;
   box-sizing: border-box;
   border-radius: 50px;
+  font-family: var(--font-body);
+  line-height: 1.5;
+
   color: var(--color-scroll-text);
 
   background: linear-gradient(
@@ -133,6 +139,28 @@ h1, h2, h3 {
     inset 0 6px 10px rgba(0,0,0,.15);
 }
 
+.scroll p {
+  opacity: 1;
+  display: block;
+  font-size: 0.5em;
+  padding: 5px;
+  font-family: var(--font-body);
+   white-space: collapse;
+}
+
+.scroll p:hover {
+  color: var(--color-hover);
+}
+
+.scroll p:first-of-type::first-letter {
+  font-size: 1.5em;
+  float: left;
+  line-height: 1;
+  padding-right: 0.1em;
+  font-weight: bold;
+  font-family: var(--font-heading);
+}
+
 /* =========================
    Sign Panel
 =========================== */
@@ -152,10 +180,22 @@ h1, h2, h3 {
     0 0, 20% 15%, 0 15%, 0 100%,
     95% 100%, 100% 90%, 100% 0
   );
+   border-radius: 10px;
 
   animation: slideLeft 1s ease-out forwards;
 }
 
+
+.slide-left h1 {
+    font-family: var(--font-heading);
+    color: var(--color-scroll-text);
+    line-height: 1em;
+}
+
+.slide-left h1:hover {
+    color: var(--color-hover);
+    cursor: pointer;
+}
 /* ===========================
    Background Styles
 =========================== */
@@ -263,7 +303,69 @@ h1, h2, h3 {
 /* ===========================
    Day
 =========================== */
+#day {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
 
+#day .sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+}
+
+#day .sun {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: calc(var(--sunMoon-height) + 50px);
+  height: calc(var(--sunMoon-height) + 50px);
+  z-index: 2;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px var(--color-sun-glow));
+  animation: pulseSun 8s infinite ease-in-out;
+}
+
+#day .town {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  object-fit: cover;
+}
+
+.cloud {
+  position: absolute;
+  opacity: 0.8;
+  z-index: 2;
+  animation: floatCloud 300s linear infinite;
+  pointer-events: none;
+}
+
+
+.cloud:nth-child(4) { 
+  left: 15%;
+  width: 380px;
+ 
+}
+
+.cloud:nth-child(5) { 
+  top: 25%;
+  width: 300px;
+
+}
+
+.cloud:nth-child(6) { 
+  top: 45%;
+  left: 35%;
+  width: 500px;
+}
 
 /* ===========================
    Night
@@ -342,3 +444,11 @@ h1, h2, h3 {
   100% { opacity: 1; transform: scaleY(1.05); }
 }
 
+@keyframes floatCloud {
+  0% {
+    transform: translateX(-25%) scale(var(--scale, 1));
+  }
+  100% {
+    transform: translateX(225%) scale(var(--scale, 1));
+  }
+}
