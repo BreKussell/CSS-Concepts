@@ -452,3 +452,88 @@ h1, h2, h3 {
     transform: translateX(225%) scale(var(--scale, 1));
   }
 }
+
+
+/* ===========================
+   Mobile Responsive Adjustments
+=========================== */
+@media (max-width: 768px) {
+
+  /* --- Global Layout: one column --- */
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    padding: 2em 1em;
+    gap: 1.5em;
+  }
+
+  /* --- Panels stacked vertically --- */
+  .scroll,
+  .slide-left {
+    width: 90%;
+    font-size: 1.2em;
+    padding: 1.2em;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+
+  .slide-left {
+    clip-path: none;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  /* --- Background images --- */
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  /* --- Hide sun & moon for simplicity --- */
+  #day .sun,
+  #night .moon {
+    display: none;
+  }
+
+  /* --- Disable cloud animations --- */
+  .cloud {
+    animation: none;
+    display: none;
+  }
+
+  /* --- Town image scales better on small screens --- */
+  .town {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    transform: none;
+  }
+
+  /* --- Scroll text readability --- */
+  .scroll p {
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+
+  /* --- Reduce gradient intensity for small screens --- */
+  #sunset::before {
+    background: radial-gradient(
+      ellipse at bottom,
+      var(--color-sunset1) 0%,
+      var(--color-sunset2) 35%,
+      var(--color-sunset3) 70%,
+      transparent 100%
+    );
+  }
+
+  #sunset .town-overlay {
+    opacity: 0.6;
+  }
+}
