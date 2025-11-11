@@ -4,8 +4,20 @@
 :root {
   --bg-dark: #0b0b0b;
   --border-white: rgba(255, 255, 255, 0.6);
+  --rainbow-gradient: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
+
   --radius: 18px;
   --text-light: #fff;
+
 }
 
 /* ===========================
@@ -16,12 +28,14 @@ body {
   background: var(--bg-dark);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.2fr 1fr 1fr;
+  grid-template-rows: 0.1fr 1fr 1fr;
   gap: 0;
   grid-template-areas:
     "navBar navBar navBar"
     "roy pair agitha"
-    "zoom zoom zoom";
+    "zoom zoom zoom"
+    "letters letters letters"
+    "flip flip flip";
   color: var(--text-light);
   font-family: 'Poppins', sans-serif;
 }
@@ -57,7 +71,7 @@ body {
 
 .navBar button {
   background: none;
-  border: 1px solid var(--border-white);
+  border: 2px solid var(--rainbow-gradient);
   border-radius: 30px;
   color: var(--text-light);
   padding: 0.4em 1em;
@@ -84,7 +98,6 @@ body {
   width: 100%;
   object-fit: cover;
   border: 1px solid var(--border-white);
-  border-radius: var(--radius);
 }
 
 /* Each grid area */
