@@ -18,24 +18,18 @@
   --radius: 18px;
   --text-light: #fff;
 
+  /* Scroll-driven animation variables */
+  --scroll: 0;     /* for panel split + zoom */
+  --letters: 0;    /* for floating words */
+  --flip: 0;       /* for 3D flip section */
 }
 
 /* ===========================
-   Base Grid Layout
+   Base Grid Layout (unchanged)
 =========================== */
 body {
   margin: 0;
   background: var(--bg-dark);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.1fr 1fr 1fr;
-  gap: 0;
-  grid-template-areas:
-    "navBar navBar navBar"
-    "roy pair agitha"
-    "zoom zoom zoom"
-    "letters letters letters"
-    "flip flip flip";
   color: var(--text-light);
   font-family: 'Poppins', sans-serif;
 }
@@ -49,8 +43,10 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1em 3em;
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg-dark);
 }
 
 .navBar .logo h2 {
@@ -71,10 +67,12 @@ body {
 
 .navBar button {
   background: none;
-  border: 2px solid var(--rainbow-gradient);
+  border-image-source: var(--rainbow-gradient);
+  border-image-slice: 1;
+  border-width: 2px;
   border-radius: 30px;
   color: var(--text-light);
-  padding: 0.4em 1em;
+  padding: 0.5em 1em;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -85,37 +83,53 @@ body {
 }
 
 /* ===========================
-   Panel Section
+   PANEL SECTION (NEW)
 =========================== */
-.pannel-section {
-  grid-column: 1 / 4;
-  grid-row: 2 / 3;
-  display: contents; 
+.panel-section {
+  position: relative;
+  height: 300vh; /* gives enough scroll room */
+  overflow: hidden;
 }
 
+/* Sticky container for three-panel layout */
+.panel-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Shared panel styles */
 .panel {
-  height: 90%;
+  height: 100vh;
   width: 100%;
   object-fit: cover;
   border: 1px solid var(--border-white);
+  transition: transform 0.4s ease-out;
 }
 
-/* Each grid area */
-.roy   { grid-area: roy; }
-.pair  { grid-area: pair; }
-.agitha{ grid-area: agitha; }
+/* Left & Right move upward on scroll */
+.panel-left {
+  transform: translateY(calc(var(--scroll) * -100vh));
+}
+.panel-right {
+  transform: translateY(calc(var(--scroll) * -100vh));
+}
 
+/* Center panel zooms slightly */
+.panel-center {
+  transform: scale(calc(1 + var(--scroll) * 0.6));
+}
 
-
-/* ===========================
-   Panel Text Overlay
-=========================== */
+/* Overlay text */
 .pannel-text {
-  position: absolute;
+  position: sticky;
   bottom: 10%;
   right: 8%;
   text-align: right;
-  z-index: 5;
+  z-index: 10;
+  margin-top: -200vh; /* keeps it appearing on top */
 }
 
 .pannel-text h1 {
@@ -129,10 +143,31 @@ body {
 }
 
 /* ===========================
-   Zoom Section (hidden)
+   OVAL MASK REVEAL (NEW)
+=========================== */
+.panel-mask {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  pointer-events: none;
+  z-index: 20;
+
+  /* oval expands from tiny → big */
+  clip-path: ellipse(
+    calc(var(--scroll) * 40%) 
+    calc(var(--scroll) * 25%) 
+    at 50% 50%
+  );
+
+  background: var(--bg-dark);
+  transition: clip-path 0.2s linear;
+}
+
+/* ===========================
+   ZOOM SECTION (unchanged)
 =========================== */
 .zoom {
-  grid-area: zoom;
   height: 100vh;
   background: #111;
   opacity: 0;
@@ -140,8 +175,69 @@ body {
   transition: opacity 1s ease, transform 1s ease;
 }
 
-/* visible state when scrolled into view */
 .zoom.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ===========================
+   FLOATING LETTERS SECTION (NEW)
+=========================== */
+.letters {
+  height: 200vh;
+  position: relative;
+}
+
+.final-text {
+  position: sticky;
+  top: 40vh;
+  font-size: 2em;
+  opacity: calc(var(--letters));
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* scrambled words before rising */
+.floating-words span {
+  position: absolute;
+  left: calc(20% + (var(--randX, 0.3) * 40%));
+  top: calc(110vh + (var(--letters) * -90vh));
+  opacity: calc(1 - var(--letters));
+  font-size: 1.5em;
+  transition: transform 0.3s ease-out;
+}
+
+/* ===========================
+   3D FLIP SECTION (NEW)
+=========================== */
+.flip {
+  height: 200vh;
+  perspective: 1200px;
+}
+
+.flip-content {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: #111;
+  padding: 2em;
+
+  transform-style: preserve-3d;
+
+  /* flip backward → forward */
+  transform: rotateX(calc((1 - var(--flip)) * 75deg));
+  opacity: var(--flip);
+  transition: transform 0.2s linear, opacity 0.2s linear;
+}
+
+/* You can style your card grid inside flip-content later */
+
+
+
+/* ===========================
+   BOTTOM SECTION (no effect)
+=========================== */
+.bottom {
+  height: 100vh;
+  background: #222;
 }

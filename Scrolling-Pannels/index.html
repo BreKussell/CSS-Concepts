@@ -1,35 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Time Based Background</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Scroll Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+
+  <!-- ==========================
+       NAVIGATION
+  =========================== -->
   <header class="navBar">
-    <div class="logo"><h2>Text</h2></div>
+    <div class="logo">
+      <h2>Text</h2>
+    </div>
     <nav>
       <a href="#">Login</a>
       <button>Button</button>
     </nav>
   </header>
 
-  <section class="pannel-section">
-    <img src="roy.png" alt="Image 1" class="panel roy" />
-    <img src="pair.png" alt="Image 2" class="panel pair" />
-    <img src="agitha.png" alt="Image 3" class="panel agitha" />
+  <!-- ==========================
+       PANEL SPLIT SECTION
+  =========================== -->
+  <section class="panel-section">
+    <div class="panel-wrapper">
+      <img src="roy.png"    alt="Image 1" class="panel panel-left" />
+      <img src="pair.png"   alt="Image 2" class="panel panel-center" />
+      <img src="agitha.png" alt="Image 3" class="panel panel-right" />
+    </div>
 
+    <!-- expanding oval / zoom mask -->
+    <div class="panel-mask"></div>
+
+    <!-- overlay text -->
     <div class="pannel-text">
       <h1>Large Text.</h1>
       <p>Sed sed dignissim sapien. Integer ac efficitur magna, ut gravida lorem.</p>
     </div>
   </section>
 
-  <section class="zoom"></section>
+  <!-- ==========================
+       ZOOM SECTION (TARGET)
+  =========================== -->
+  <section class="zoom">
+    <div class="zoom-inner">
+      <h2>Zoomed-In</h2>
+      <p>
+        Zoom in through oval.
+      </p>
+    </div>
+  </section>
 
-    <section class="letters"></section>
 
-      <section class="flip"></section>
+  <section class="letters">
+    <p class="final-text">
+      Build <span class="glow">beautiful</span> interfaces
+      <span class="glow">faster</span> with minimal code.
+    </p>
+
+    <div class="floating-words">
+      <span>beautiful</span>
+      <span>faster</span>
+      <span>interfaces</span>
+    </div>
+  </section>
+
+
+  <section class="flip">
+    <div class="flip-content">
+      <h2>Explore the Features</h2>
+
+      <div class="card-grid">
+        <!-- Row 1 -->
+        <article class="card">
+          <h3>Card One</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Card Two</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Card Three</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+
+        <!-- Row 2 -->
+        <article class="card">
+          <h3>Card Four</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Card Five</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Card Six</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+
+        <!-- Row 3 -->
+        <article class="card">
+          <h3>Card Seven</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Card Eight</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+        <article class="card">
+          <h3>Card Nine</h3>
+          <p>Short description about this feature or item.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="bottom">
+    <h2>Bottom Section</h2>
+    <p>
+      This section scrolls normally with no special effects.
+      Add your footer content or final call-to-action here.
+    </p>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
