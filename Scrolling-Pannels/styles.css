@@ -25,7 +25,7 @@
 }
 
 /* ===========================
-   Base Grid Layout (unchanged)
+   General styles
 =========================== */
 body {
   margin: 0;
@@ -83,15 +83,14 @@ body {
 }
 
 /* ===========================
-   PANEL SECTION (NEW)
+Pannel section
 =========================== */
 .panel-section {
   position: relative;
-  height: 300vh; /* gives enough scroll room */
+  height: 300vh; 
   overflow: hidden;
 }
 
-/* Sticky container for three-panel layout */
 .panel-wrapper {
   position: sticky;
   top: 0;
@@ -100,7 +99,6 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* Shared panel styles */
 .panel {
   height: 100vh;
   width: 100%;
@@ -109,7 +107,6 @@ body {
   transition: transform 0.4s ease-out;
 }
 
-/* Left & Right move upward on scroll */
 .panel-left {
   transform: translateY(calc(var(--scroll) * -100vh));
 }
@@ -117,7 +114,7 @@ body {
   transform: translateY(calc(var(--scroll) * -100vh));
 }
 
-/* Center panel zooms slightly */
+/*base*/
 .panel-center {
   transform: scale(calc(1 + var(--scroll) * 0.6));
 }
@@ -129,7 +126,7 @@ body {
   right: 8%;
   text-align: right;
   z-index: 10;
-  margin-top: -200vh; /* keeps it appearing on top */
+  margin-top: -200vh; 
 }
 
 .pannel-text h1 {
@@ -143,7 +140,7 @@ body {
 }
 
 /* ===========================
-   OVAL MASK REVEAL (NEW)
+   Oval mask for zoom?
 =========================== */
 .panel-mask {
   position: sticky;
@@ -153,7 +150,6 @@ body {
   pointer-events: none;
   z-index: 20;
 
-  /* oval expands from tiny → big */
   clip-path: ellipse(
     calc(var(--scroll) * 40%) 
     calc(var(--scroll) * 25%) 
@@ -165,7 +161,7 @@ body {
 }
 
 /* ===========================
-   ZOOM SECTION (unchanged)
+Zoom
 =========================== */
 .zoom {
   height: 100vh;
@@ -181,7 +177,7 @@ body {
 }
 
 /* ===========================
-   FLOATING LETTERS SECTION (NEW)
+   letters
 =========================== */
 .letters {
   height: 200vh;
@@ -197,7 +193,6 @@ body {
   padding: 0 20px;
 }
 
-/* scrambled words before rising */
 .floating-words span {
   position: absolute;
   left: calc(20% + (var(--randX, 0.3) * 40%));
@@ -208,7 +203,7 @@ body {
 }
 
 /* ===========================
-   3D FLIP SECTION (NEW)
+   3D flip
 =========================== */
 .flip {
   height: 200vh;
@@ -234,7 +229,7 @@ body {
 
 
 /* ===========================
-   BOTTOM SECTION (no effect)
+botom, add floating spheres
 =========================== */
 .bottom {
   height: 100vh;
