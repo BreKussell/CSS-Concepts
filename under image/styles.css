@@ -1,3 +1,29 @@
+/* ===============================================================
+Root
+================================================================ */
+:root {
+  
+    --reveal-bg-image: url("town.png");
+    --reveal-overlay-color: lightslategray;
+
+    
+    --reveal-radius: 25px;          
+    --reveal-softness: 30px;       
+   
+    --x: 50%;
+    --y: 50%;
+ 
+    --font-main: sans-serif;
+
+ 
+    --padding-main: 4rem;
+    --content-color: #ffffff;
+}
+
+
+/* ===============================================================
+   reveal wrapper
+================================================================ */
 .reveal-wrapper {
     position: relative;
     width: 100%;
@@ -6,44 +32,53 @@
 }
 
 
+/* ===============================================================
+  Background
+================================================================ */
 .reveal-bg {
     position: absolute;
     inset: 0;
-    background: url("town.png") center/cover no-repeat;
+    background: var(--reveal-bg-image) center/cover no-repeat;
     z-index: 1;
 }
 
 
+/* ===============================================================
+   reveal mask
+================================================================ */
 .reveal-mask {
     position: absolute;
     inset: 0;
-    background: lightslategray;
+    background: var(--reveal-overlay-color);
     z-index: 2;
 
-
+    
     mask-image: radial-gradient(
-        circle 25px at var(--x, 50%) var(--y, 50%),
+        circle var(--reveal-radius) at var(--x) var(--y),
         transparent 0,
-        transparent 0px,
-        black 30px
+        transparent calc(var(--reveal-radius) * 1),
+        black var(--reveal-softness)
     );
 
-
+    /* Safari/WebKit version */
     -webkit-mask-image: radial-gradient(
-        circle 25px at var(--x, 50%) var(--y, 50%),
+        circle var(--reveal-radius) at var(--x) var(--y),
         transparent 0,
-        transparent 100px,
-        black 30px
+        transparent calc(var(--reveal-radius) * 1),
+        black var(--reveal-softness)
     );
 
-    transition: mask-image 0.1s, -webkit-mask-image 0.1s;
+    transition: mask-image 0.1s linear, -webkit-mask-image 0.1s linear;
 }
 
 
+/* ===============================================================
+   top
+================================================================ */
 .reveal-content {
     position: relative;
     z-index: 3;
-    color: white;
-    padding: 4rem;
-    font-family: sans-serif;
+    padding: var(--padding-main);
+    color: var(--content-color);
+    font-family: var(--font-main);
 }
