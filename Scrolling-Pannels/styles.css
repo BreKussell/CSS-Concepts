@@ -1,147 +1,207 @@
-/* ===========================
-   Root Variables
-=========================== */
+/* ========================================================================
+   ROOT VARIABLES — COLOR SYSTEM, SPACING, EFFECTS
+=========================================================================== */
 :root {
-  --bg-dark: #0b0b0b;
-  --border-white: rgba(255, 255, 255, 0.6);
-  --rainbow-gradient: linear-gradient(
-    to right,
-    red,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
-  );
+  --bg-dark: #0b0b12;
+  --bg-mid: #14141f;
+  --bg-light: #1d1d2b;
+
+  --text-main: #ffffff;
+  --text-soft: #d0d0e0;
+  --text-accent: #8ddfff;
+
+  --accent-gradient: linear-gradient(135deg, #5cdbc1, #7ed0ff, #b7a6ff);
+
+  --border-white: rgba(255, 255, 255, 0.25);
+  --glass-bg: rgba(255, 255, 255, 0.06);
 
   --radius: 18px;
-  --text-light: #fff;
 
-  /* Scroll-driven animation variables */
-  --scroll: 0;     /* for panel split + zoom */
-  --letters: 0;    /* for floating words */
-  --flip: 0;       /* for 3D flip section */
+  --shadow-soft: 0 8px 20px rgba(0,0,0,0.45);
+  --shadow-glow: 0 0 18px rgba(90, 190, 255, 0.4);
+
+  --scroll: 0;
+  --letters: 0;
+  --flip: 0;
+  --zoom: 0;
+  --oval: 0;      /* implied variation */
+  --split: 0;     /* implied variation */
 }
 
-/* ===========================
-   General styles
-=========================== */
+
+/* ========================================================================
+   GLOBAL BASE STYLES
+=========================================================================== */
+html, body {
+  width: 100%;
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   background: var(--bg-dark);
-  color: var(--text-light);
-  font-family: 'Poppins', sans-serif;
+  color: var(--text-main);
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
 }
 
-/* ===========================
-   Navigation Bar
-=========================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("dots.png");
+  background-repeat: repeat;
+  background-size: 300px;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+h1, h2, h3 {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+p { color: var(--text-soft); }
+
+/* Smooth transitions globally */
+* { transition: 0.25s ease; }
+
+/* Default section formatting after panel section */
+.panel-section ~ section {
+  width: 80%;
+  margin: 0 auto;
+  background-color: var(--bg-mid);
+}
+
+
+/* ========================================================================
+   NAVIGATION — MODERN GLASS HEADER
+=========================================================================== */
 .navBar {
-  grid-area: navBar;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 3em;
+  padding: 0.9em 3em;
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--bg-dark);
+
+  background: rgba(10,10,18,0);
+  backdrop-filter: blur(3px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.navBar .logo h2 {
-  margin: 0;
+.navBar h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .navBar nav {
   display: flex;
-  align-items: center;
-  gap: 1.5em;
+  gap: 1.6em;
 }
 
 .navBar a {
-  color: var(--text-light);
+  color: var(--text-soft);
   text-decoration: none;
   font-weight: 500;
+  font-size: 1rem;
 }
 
+.navBar a:hover { color: var(--text-accent); }
+
 .navBar button {
-  background: none;
-  border-image-source: var(--rainbow-gradient);
-  border-image-slice: 1;
-  border-width: 2px;
-  border-radius: 30px;
-  color: var(--text-light);
-  padding: 0.5em 1em;
+  padding: 0.55em 1.4em;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1rem;
+
+  border-radius: 16px;
+  border: 3px solid transparent;
+
+  background:
+    linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+    linear-gradient(90deg, #ff5f6d, #ffc371, #47ff9a, #45a4ff, #b47bff) border-box;
+
+  color: var(--text-main);
+  box-shadow: var(--shadow-soft);
 }
 
 .navBar button:hover {
-  background: var(--text-light);
-  color: var(--bg-dark);
+  transform: translateY(-2px);
+  padding: 0.55em 1.4em;
+  background: var(--accent-gradient);
+  border-radius: 30px;
+  border: none;
+  color: #111;
+  box-shadow: var(--shadow-soft);
 }
 
-/* ===========================
-Pannel section
-=========================== */
+
+/* ========================================================================
+   PANEL SECTION — SPLIT PANELS + OVAL MASK
+=========================================================================== */
 .panel-section {
   position: relative;
-  height: 300vh; 
+  height: 100vh;
   overflow: hidden;
 }
 
+/* Fixed wrapper for the 3 panels */
 .panel-wrapper {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
 }
 
+/* The panel images */
 .panel {
   height: 100vh;
   width: 100%;
   object-fit: cover;
   border: 1px solid var(--border-white);
-  transition: transform 0.4s ease-out;
+  filter: brightness(0.82);
 }
 
-.panel-left {
-  transform: translateY(calc(var(--scroll) * -100vh));
-}
+.panel:hover { filter: brightness(1); }
+
+/* Sliding movement */
+.panel-left,
 .panel-right {
-  transform: translateY(calc(var(--scroll) * -100vh));
+  transform: translateY(calc(var(--split) * -100vh));
 }
 
-/*base*/
 .panel-center {
-  transform: scale(calc(1 + var(--scroll) * 0.6));
+  position: relative;
+  z-index: 2;
+  transform: translateY(0) scale(1) !important;
 }
 
 /* Overlay text */
 .pannel-text {
   position: sticky;
-  bottom: 10%;
-  right: 8%;
-  text-align: right;
+  bottom: 12%;
+  right: 6%;
   z-index: 10;
-  margin-top: -200vh; 
+  margin-top: -200vh;
+  text-align: right;
 }
 
 .pannel-text h1 {
-  font-size: 4em;
-  margin: 0;
+  font-size: 4.5rem;
+  text-shadow: var(--shadow-soft);
 }
 
 .pannel-text p {
-  font-size: 1.2em;
-  opacity: 0.8;
+  font-size: 1.3rem;
+  max-width: 500px;
+  margin-left: auto;
+  opacity: 0.9;
 }
 
-/* ===========================
-   Oval mask for zoom?
-=========================== */
+/* Oval mask transition */
 .panel-mask {
   position: sticky;
   top: 0;
@@ -149,26 +209,37 @@ Pannel section
   width: 100%;
   pointer-events: none;
   z-index: 20;
+  background: var(--bg-dark);
 
   clip-path: ellipse(
-    calc(var(--scroll) * 40%) 
-    calc(var(--scroll) * 25%) 
+    calc(var(--oval) * 40%)
+    calc(var(--oval) * 22%)
     at 50% 50%
   );
-
-  background: var(--bg-dark);
-  transition: clip-path 0.2s linear;
 }
 
-/* ===========================
-Zoom
-=========================== */
+/* Scroll spacer */
+.panel-spacer { height: 400vh; }
+
+
+/* ========================================================================
+   ZOOM SECTION
+=========================================================================== */
 .zoom {
   height: 100vh;
-  background: #111;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s ease, transform 1s ease;
+  background: var(--bg-mid);
+
+  transform:
+    translateY(calc((1 - var(--zoom)) * 40px))
+    scale(calc(1 + var(--zoom) * 0.6));
+
+  opacity: var(--zoom);
+  padding: 5rem 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .zoom.visible {
@@ -176,87 +247,346 @@ Zoom
   transform: translateY(0);
 }
 
-/* ===========================
-   letters
-=========================== */
+.zoom-inner h2 {
+  font-size: 2.7rem;
+  color: var(--text-accent);
+}
+
+
+/* ========================================================================
+   FLOATING WORDS — SNAP-UP TEXT EFFECT
+=========================================================================== */
 .letters {
   height: 200vh;
   position: relative;
 }
 
-.final-text {
+.letters-inner {
   position: sticky;
-  top: 40vh;
-  font-size: 2em;
-  opacity: calc(var(--letters));
+  top: 0;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+.final-text {
+  position: relative;
+  z-index: 2;
+
+  font-size: 2.3rem;
+  font-weight: 600;
   text-align: center;
-  padding: 0 20px;
+
+  opacity: calc((var(--letters) - 0.6) * 2.5);
+}
+
+.final-text .glow {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.floating-words {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .floating-words span {
   position: absolute;
-  left: calc(20% + (var(--randX, 0.3) * 40%));
-  top: calc(110vh + (var(--letters) * -90vh));
-  opacity: calc(1 - var(--letters));
-  font-size: 1.5em;
-  transition: transform 0.3s ease-out;
-}
+  bottom: 0;
+  left: 50%;
 
-/* ===========================
-   Card Grid
-=========================== */
-.card-grid {
-  margin-top: 2em;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5em;
-  transform-style: preserve-3d;
-}
+  transform: translate(
+    calc(-50% + var(--offsetX, 0)),
+    calc(var(--letters) * (var(--finalY) - 100vh))
+  );
 
-.card {
-  background: #1a1a1a;
-  border: 1px solid rgba(255,255,255,0.25);
-  padding: 1.5em;
-  border-radius: 12px;
-  backdrop-filter: blur(4px);
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  font-size: 1.7rem;
+  color: var(--text-accent);
+
+  opacity: calc(1 - var(--letters) * 1.4);
 }
 
 
-
-
-
-/* ===========================
-   3D flip
-=========================== */
+/* ========================================================================
+   CARD GRID — FLIP + EXPAND + GLASSMORPHIC
+=========================================================================== */
 .flip {
-  height: 300vh;
-  perspective: 1250px;
+  height: 350vh;
+  perspective: 1200px;
+  background: var(--bg-mid);
+  padding: 0;
 }
 
 .flip-content {
   position: sticky;
   top: 0;
   height: 100vh;
-  background: #111;
-  padding: 2em;
+  padding: 4rem;
+  background: var(--bg-mid);
 
-  transform-style: preserve-3d;
+  transform-origin: center;
+  transform:
+    rotateX(calc((1 - var(--flip)) * 85deg))
+    scaleX(calc(1 + max(0, var(--flip) - 0.85) * 4));
 
-  /* flip backward → forward */
-  transform: rotateX(calc((1 - var(--flip)) * 85deg));
   opacity: var(--flip);
-  transition: transform 0.1s linear, opacity 0.2s linear;
+}
+
+.card-grid {
+  width: 80%;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 1.7rem;
+
+  --extra-gap: calc(max(0, var(--flip) - 0.85) * 10rem);
+  column-gap: calc(1.7rem + var(--extra-gap));
+}
+
+.card {
+  position: relative;
+  padding: 2rem;
+
+  background:
+    linear-gradient(var(--bg-mid), var(--bg-mid)) padding-box,
+    linear-gradient(90deg, #ff5f6d, #ffc371, #47ff9a, #45a4ff, #b47bff) border-box;
+
+  border: 3px solid transparent;
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Zoom target */
+.zoom-target {
+  position: relative;
+  z-index: 50;
+
+  transform: translate(-50%, -50%) scale(calc(1 + var(--zoom) * 3));
+  opacity: calc(1 - (var(--zoom) * 0.15));
+}
+
+/* Zoom mode */
+body.is-zooming-card .card-grid .card {
+  opacity: calc(1 - var(--zoom));
+  filter: blur(calc(var(--zoom) * 4px));
+  pointer-events: none;
+}
+
+body.is-zooming-card .zoom-target {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(80vw, 900px);
+  max-height: 80vh;
+
+  transform:
+    translate(-50%, -50%)
+    scale(calc(1 + var(--zoom) * 0.5));
 }
 
 
-
-
-/* ===========================
-botom, add floating spheres
-=========================== */
+/* ========================================================================
+   BOTTOM SECTION — FLOATING SPHERES
+=========================================================================== */
 .bottom {
   height: 100vh;
-  background: #222;
+  background: var(--bg-light);
+  padding: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.bottom h2 {
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+}
+
+.sphere {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, #8ba3ff, #3c3c5e);
+  opacity: 0.8;
+
+  box-shadow:
+    0 0 18px 6px rgba(140, 180, 255, 0.25),
+    0 0 35px 12px rgba(120, 160, 255, 0.15),
+    0 0 70px 25px rgba(100, 140, 255, 0.10);
+
+  filter: blur(1px);
+
+  animation: floatY 6s ease-in-out infinite alternate,
+             floatX 9s ease-in-out infinite alternate;
+}
+
+.sphere.one { left: 12%; top: 45%; width: 130px; height: 130px; }
+.sphere.two { right: 18%; top: 62%; width: 170px; height: 170px; animation-delay: 0.5s; }
+
+@keyframes floatY {
+  0%   { transform: translate(-10px, 0); }
+  50%  { transform: translate(25px, -35px); }
+  100% { transform: translate(-5px, 20px); }
+}
+
+@keyframes floatX {
+  0%   { transform: translate(-20px, 20px); }
+  50%  { transform: translate(5px, -35px); }
+  100% { transform: translate(-15px, 10px); }
+}
+
+
+/* ========================================================================
+   BACKGROUND LINES — FULL SCREEN LIGHT TRAILS
+=========================================================================== */
+.lines-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  top: -120px;
+  left: 0;
+  width: 2px;
+  height: 60px;
+  background: white;
+  opacity: 0.7;
+  filter: blur(0.5px);
+
+  box-shadow:
+    2vw -10vh #ff5f6d,
+    10vw -20vh #fff,
+    18vw -5vh #47ff9a,
+    26vw -15vh #45a4ff,
+    35vw -25vh #b47bff,
+    45vw -18vh #fff,
+    55vw -30vh #ffc371,
+    65vw -10vh #47ff9a,
+    75vw -22vh #45a4ff,
+    85vw -12vh #b47bff,
+    95vw -28vh #ff5f6d,
+    3vw -60vh #ffc371,
+    15vw -55vh #fff,
+    25vw -70vh #45a4ff,
+    40vw -65vh #b47bff,
+    58vw -72vh #ff5f6d,
+    72vw -80vh #ffc371,
+    88vw -62vh #47ff9a;
+
+  animation: fall 10s linear infinite;
+}
+
+@keyframes fall {
+  0%   { transform: translateY(0); opacity: 0.8; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}
+
+
+/* ========================================================================
+   FULL-VIEWPORT FOOTER — MICRO.SO INSPIRED
+=========================================================================== */
+.footer {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: var(--bg-mid);
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("dots.png");
+  background-repeat: repeat;
+  background-size: 250px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.footer-main-title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255);
+  margin: 2rem auto;
+}
+
+.footer-links {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+}
+
+.footer-links a {
+  color: var(--text-soft);
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.footer-links a:hover { color: var(--text-accent); }
+
+.footer-copy {
+  margin-top: 2.5rem;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  opacity: 0.85;
+}
+
+/* Giant watermark text */
+.footer-giant-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100vw;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-giant-text span {
+  font-size: clamp(200px, 38vw, 650px);
+  font-weight: 900;
+  color: rgba(255,255,255,0.1);
+  letter-spacing: -0.04em;
+  line-height: 0.7;
+  text-transform: lowercase;
+  user-select: none;
 }

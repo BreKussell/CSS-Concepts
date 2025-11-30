@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <!-- ==========================
        NAVIGATION
   =========================== -->
@@ -20,6 +19,10 @@
       <button>Button</button>
     </nav>
   </header>
+
+  <div class="lines-bg">
+  <div class="line"></div>
+</div>
 
 
   <section class="panel-section">
@@ -39,29 +42,36 @@
     </div>
   </section>
 
+   <div class="panel-spacer"></div>
+
 
   <section class="zoom">
     <div class="zoom-inner">
       <h2>Zoomed-In</h2>
       <p>
-        Zoom in through oval.
+        Zoom in.
       </p>
     </div>
   </section>
 
 
-  <section class="letters">
+<section class="letters">
+  <div class="letters-inner">
     <p class="final-text">
       Build <span class="glow">beautiful</span> interfaces
       <span class="glow">faster</span> with minimal code.
     </p>
 
     <div class="floating-words">
-      <span>beautiful</span>
-      <span>faster</span>
-      <span>interfaces</span>
+      <span style="--finalY: 40vh; --offsetX: -15%;">beautiful</span>
+      <span style="--finalY: 42vh; --offsetX:  10%;">faster</span>
+      <span style="--finalY: 44vh; --offsetX:  35%;">interfaces</span>
     </div>
-  </section>
+  </div>
+</section>
+
+
+ 
 
 
   <section class="flip">
@@ -102,7 +112,7 @@
           <h3>Card Seven</h3>
           <p>Short description about this feature or item.</p>
         </article>
-        <article class="card">
+        <article class="card" class="card zoom-target">
           <h3>Card Eight</h3>
           <p>Short description about this feature or item.</p>
         </article>
@@ -121,7 +131,32 @@
       This section scrolls normally with no special effects.
       Add your footer content or final call-to-action here.
     </p>
+      <div class="sphere one"></div>
+  <div class="sphere two"></div>
   </section>
+<footer class="footer">
+  <div class="footer-content">
+
+    <h1 class="footer-main-title">footer.</h1>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-links">
+      <a href="#">Link ↗</a>
+      <a href="#">Link ↗</a>
+      <a href="#">Link ↗</a>
+      <a href="#">Link ↗</a>
+    </div>
+
+    <p class="footer-copy">© Copywrite name here</p>
+
+  </div>
+
+  <!-- faint giant text behind everything -->
+  <div class="footer-giant-text">
+    <span>Giant</span>
+  </div>
+</footer>
 
   <script src="script.js"></script>
 </body>
