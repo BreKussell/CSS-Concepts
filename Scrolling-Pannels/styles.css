@@ -1,5 +1,5 @@
 /* ========================================================================
-   ROOT VARIABLES — COLOR SYSTEM, SPACING, EFFECTS
+   Root Variables
 =========================================================================== */
 :root {
   --bg-dark: #0b0b12;
@@ -24,13 +24,13 @@
   --letters: 0;
   --flip: 0;
   --zoom: 0;
-  --oval: 0;      /* implied variation */
-  --split: 0;     /* implied variation */
+  --oval: 0;      
+  --split: 0;     
 }
 
 
 /* ========================================================================
-   GLOBAL BASE STYLES
+   Golbal Styles
 =========================================================================== */
 html, body {
   width: 100%;
@@ -64,10 +64,8 @@ h1, h2, h3 {
 
 p { color: var(--text-soft); }
 
-/* Smooth transitions globally */
 * { transition: 0.25s ease; }
 
-/* Default section formatting after panel section */
 .panel-section ~ section {
   width: 80%;
   margin: 0 auto;
@@ -76,7 +74,7 @@ p { color: var(--text-soft); }
 
 
 /* ========================================================================
-   NAVIGATION — MODERN GLASS HEADER
+   Navigation
 =========================================================================== */
 .navBar {
   display: flex;
@@ -140,7 +138,7 @@ p { color: var(--text-soft); }
 
 
 /* ========================================================================
-   PANEL SECTION — SPLIT PANELS + OVAL MASK
+   Panel Section
 =========================================================================== */
 .panel-section {
   position: relative;
@@ -148,7 +146,6 @@ p { color: var(--text-soft); }
   overflow: hidden;
 }
 
-/* Fixed wrapper for the 3 panels */
 .panel-wrapper {
   position: fixed;
   inset: 0;
@@ -156,7 +153,6 @@ p { color: var(--text-soft); }
   grid-template-columns: repeat(3, 1fr);
 }
 
-/* The panel images */
 .panel {
   height: 100vh;
   width: 100%;
@@ -167,7 +163,6 @@ p { color: var(--text-soft); }
 
 .panel:hover { filter: brightness(1); }
 
-/* Sliding movement */
 .panel-left,
 .panel-right {
   transform: translateY(calc(var(--split) * -100vh));
@@ -179,7 +174,6 @@ p { color: var(--text-soft); }
   transform: translateY(0) scale(1) !important;
 }
 
-/* Overlay text */
 .pannel-text {
   position: sticky;
   bottom: 12%;
@@ -201,7 +195,6 @@ p { color: var(--text-soft); }
   opacity: 0.9;
 }
 
-/* Oval mask transition */
 .panel-mask {
   position: sticky;
   top: 0;
@@ -218,12 +211,11 @@ p { color: var(--text-soft); }
   );
 }
 
-/* Scroll spacer */
 .panel-spacer { height: 400vh; }
 
 
 /* ========================================================================
-   ZOOM SECTION
+   Zoom Section
 =========================================================================== */
 .zoom {
   height: 100vh;
@@ -254,7 +246,7 @@ p { color: var(--text-soft); }
 
 
 /* ========================================================================
-   FLOATING WORDS — SNAP-UP TEXT EFFECT
+Floating Words (Kinda works)
 =========================================================================== */
 .letters {
   height: 200vh;
@@ -314,7 +306,7 @@ p { color: var(--text-soft); }
 
 
 /* ========================================================================
-   CARD GRID — FLIP + EXPAND + GLASSMORPHIC
+Card grid, Flip
 =========================================================================== */
 .flip {
   height: 350vh;
@@ -369,7 +361,6 @@ p { color: var(--text-soft); }
   box-shadow: var(--shadow-glow);
 }
 
-/* Zoom target */
 .zoom-target {
   position: relative;
   z-index: 50;
@@ -378,7 +369,6 @@ p { color: var(--text-soft); }
   opacity: calc(1 - (var(--zoom) * 0.15));
 }
 
-/* Zoom mode */
 body.is-zooming-card .card-grid .card {
   opacity: calc(1 - var(--zoom));
   filter: blur(calc(var(--zoom) * 4px));
@@ -399,7 +389,7 @@ body.is-zooming-card .zoom-target {
 
 
 /* ========================================================================
-   BOTTOM SECTION — FLOATING SPHERES
+Floating Shperes 
 =========================================================================== */
 .bottom {
   height: 100vh;
@@ -448,7 +438,7 @@ body.is-zooming-card .zoom-target {
 
 
 /* ========================================================================
-   BACKGROUND LINES — FULL SCREEN LIGHT TRAILS
+Background, dot grid and animation 
 =========================================================================== */
 .lines-bg {
   position: fixed;
@@ -498,7 +488,7 @@ body.is-zooming-card .zoom-target {
 
 
 /* ========================================================================
-   FULL-VIEWPORT FOOTER — MICRO.SO INSPIRED
+Footer
 =========================================================================== */
 .footer {
   position: relative;
