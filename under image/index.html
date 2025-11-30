@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Based Background</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="reveal-wrapper">
+  <div class="reveal-bg"></div>
+  <div class="reveal-mask"></div>
+
+  <div class="reveal-content">
+    <h1>Explore the Town</h1>
+    <p>Move your mouse to reveal the image behind.</p>
+  </div>
+</div>
+
+<script src="reveal.js"></script>
+
+</body>
+
+
+<script>
+    const wrapper = document.querySelector(".reveal-wrapper");
+
+wrapper.addEventListener("mousemove", (e) => {
+  const rect = wrapper.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  wrapper.style.setProperty("--x", x + "px");
+  wrapper.style.setProperty("--y", y + "px");
+});
+
+</script>
+</html>
