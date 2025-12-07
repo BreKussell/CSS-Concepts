@@ -85,7 +85,7 @@ p { color: var(--text-soft); }
   top: 0;
   z-index: 1000;
 
-  background: rgba(10,10,18);
+  background: rgba(10,10,18,0.1);
   backdrop-filter: blur(3px);
   border-bottom: 1px solid rgba(255,255,255);
 }
@@ -581,3 +581,106 @@ Footer
   user-select: none;
 }
 
+/* ==========
+   Mobile 
+   ===========*/
+@media (max-width: 768px) {
+
+
+  .navBar {
+    padding: 0.75em 1.2em;
+  }
+
+  .navBar nav {
+    gap: 1em;
+  }
+
+  .navBar h2 {
+    font-size: 1.3rem;
+  }
+
+
+
+  .panel-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    border: none;
+  }
+
+  /* hide side panels on mobile */
+  .panel-left,
+  .panel-right {
+    display: none;
+  }
+
+  .panel-center {
+    width: 100vw;
+  }
+
+  .pannel-text {
+    bottom: 8%;
+    right: 5%;
+    text-align: center;
+  }
+
+  .pannel-text h1 {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+
+  .pannel-text p {
+    font-size: 1.1rem;
+    max-width: 90%;
+  }
+
+
+  .zoom {
+    padding: 3rem 1.5rem;
+  }
+
+  .zoom-inner h2 {
+    font-size: 2rem;
+  }
+
+
+  .final-text {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+    padding: 0 1rem;
+  }
+
+  .floating-words span {
+    font-size: 1.2rem;
+  }
+
+
+  .flip-content {
+    padding: 2rem 1.2rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .card {
+    padding: 1.6rem;
+  }
+
+  /* disable card zoom on phones */
+  body.is-zooming-card .zoom-target {
+    position: relative;
+    transform: none;
+    width: auto;
+    max-height: none;
+  }
+
+
+  .footer-main-title {
+    font-size: clamp(2.5rem, 10vw, 3.2rem);
+  }
+
+  .footer-giant-text span {
+    font-size: 50vw;
+  }
+}

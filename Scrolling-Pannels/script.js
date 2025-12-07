@@ -13,8 +13,6 @@ const card8 = document.querySelector(".zoom-target");
 // length of the pinned scroll scene
 const totalScroll = 4000; // px of spacer height
 
-
-
 // ================================
 //  MAIN SCROLL HANDLER
 // ================================

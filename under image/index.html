@@ -6,32 +6,89 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="reveal-wrapper">
-  <div class="reveal-bg"></div>
-  <div class="reveal-mask"></div>
 
-  <div class="reveal-content">
-    <h1>Title</h1>
-    <p>Move your mouse to reveal the image behind.</p>
+<!-- Fixed sky -->
+<div class="reveal-bg">
+  <div class="night-sky">
+    <div class="stars-1"></div>
+    <div class="stars-2"></div>
+    <div class="stars-3"></div>
+    <div class="big-stars"></div>
+    <div class="moon"></div>
   </div>
 </div>
 
-<script src="reveal.js"></script>
+<!-- Fixed overlay w/ reveal -->
+<div class="reveal-mask"></div>
+
+<!-- Scrolling content -->
+<main class="page">
+
+  <section class="hero">
+    <h1>Main Text</h1>
+    <p class="sub">Small Text</p>
+  </section>
+
+  <section class="block left">
+    <img src="planet.png" alt="">
+    <p>Text</p>
+  </section>
+
+  <section class="block center">
+    <img src="nebula.png" alt="">
+    <p>Text</p>
+  </section>
+
+  <section class="block split">
+    <img src="stars.png" alt="">
+    <p>Text</p>
+    <img src="moon.png" alt="">
+  </section>
+
+  <section class="block right">
+    <img src="sun.png" alt="">
+  </section>
+
+  <section class="block right">
+    <img src="planet.png" alt="">
+  </section>
+  <!-- FINAL SECTION: overlay disappears -->
+  <section class="reveal-end">
+
+  </section>
+
+</main>
+
+<script>
+const mask = document.querySelector(".reveal-mask");
+
+window.addEventListener("mousemove", e => {
+  mask.style.setProperty("--x", e.clientX + "px");
+  mask.style.setProperty("--y", e.clientY + "px");
+});
+
+
+const revealEnd = document.querySelector(".reveal-end");
+const body = document.body;
+
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      body.classList.add("reveal-finished");
+    } else {
+      body.classList.remove("reveal-finished");
+    }
+  },
+  {
+    threshold: 0.4
+  }
+);
+
+observer.observe(revealEnd);
+
+
+</script>
 
 </body>
 
-
-<script>
-    const wrapper = document.querySelector(".reveal-wrapper");
-
-wrapper.addEventListener("mousemove", (e) => {
-  const rect = wrapper.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  wrapper.style.setProperty("--x", x + "px");
-  wrapper.style.setProperty("--y", y + "px");
-});
-
-</script>
 </html>

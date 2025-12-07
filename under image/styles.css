@@ -1,84 +1,310 @@
 /* ===============================================================
-Root
+   Root Variables
 ================================================================ */
 :root {
-  
-    --reveal-bg-image: url("town.png");
-    --reveal-overlay-color: lightslategray;
+  /* Reveal overlay */
+  --reveal-overlay-color: navy;
+  --reveal-radius: 125px;
+  --reveal-softness: 30px;
+  --x: 50%;
+  --y: 50%;
 
-    
-    --reveal-radius: 100px;          
-    --reveal-softness: 30px;       
-   
-    --x: 50%;
-    --y: 50%;
- 
-    --font-main: sans-serif;
+  /* Typography */
+  --font-main: system-ui, sans-serif;
+  --content-color: #ffffff;
+  --padding-main: 4rem;
 
- 
-    --padding-main: 4rem;
-    --content-color: #ffffff;
+  /* Sky gradient: navy → indigo → deep violet */
+  --sky-color-1: #081124;
+  --sky-color-2: #1a1450;
+  --sky-color-3: #2a0e47;
+
+  /* Stars */
+  --star-color: rgba(255, 255, 220, 0.9);
+  --star-glow: rgba(255, 255, 200, 0.7);
+  --star1-size: 2px;
+  --star2-size: 2.5px;
+  --star3-size: 3px;
+
+  /* Moon */
+  --moon-size: 180px;
+  --moon-color: #f7f3d4;
+  --moon-glow: rgba(255, 255, 200, 0.45);
 }
 
-
 /* ===============================================================
-   reveal wrapper
+   Base reset
 ================================================================ */
-.reveal-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  color: var(--content-color);
+  background: black;
+}
 
 /* ===============================================================
-  Background
+   Fixed background sky layer
 ================================================================ */
 .reveal-bg {
-    position: absolute;
-    inset: 0;
-    background: var(--reveal-bg-image) center/cover no-repeat;
-    z-index: 1;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 }
 
+.night-sky {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--sky-color-1) 0%,
+    var(--sky-color-2) 45%,
+    var(--sky-color-3) 100%
+  );
+  overflow: hidden;
+}
+
+.night-sky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 60%,
+    rgba(255, 255, 255, 0.05),
+    transparent 70%
+  );
+}
 
 /* ===============================================================
-   reveal mask
+   Star layers
+================================================================ */
+.stars-1,
+.stars-2,
+.stars-3 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 600px 600px;
+}
+
+.stars-1 {
+  background-image: radial-gradient(var(--star-color) var(--star1-size), transparent 2px);
+  opacity: 0.45;
+}
+
+.stars-2 {
+  background-image: radial-gradient(var(--star-color) var(--star2-size), transparent 2px);
+  opacity: 0.7;
+}
+
+.stars-3 {
+  background-image: radial-gradient(var(--star-color) var(--star3-size), transparent 2px);
+  opacity: 0.6;
+}
+
+/* ===============================================================
+   Large 4-point stars
+================================================================ */
+.big-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.big-stars::before,
+.big-stars::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--star-color);
+  filter: drop-shadow(0 0 6px var(--star-glow));
+  top: 0;
+  left: 0;
+  box-shadow:
+    50px 70px,
+    180px 120px,
+    260px 200px,
+    350px 40px,
+    420px 300px,
+    520px 110px,
+    590px 240px,
+    650px 150px,
+    720px 80px,
+    800px 260px,
+    900px 180px,
+    1000px 60px,
+    1100px 220px,
+    1250px 100px,
+    1380px 260px,
+    1480px 180px,
+    1600px 110px;
+}
+
+.big-stars::after {
+  transform: rotate(45deg);
+  box-shadow:
+    100px 40px,
+    200px 200px,
+    280px 130px,
+    360px 260px,
+    460px 70px,
+    540px 300px,
+    620px 200px,
+    700px 130px,
+    780px 260px,
+    860px 80px,
+    950px 200px,
+    1040px 140px,
+    1160px 260px,
+    1290px 60px,
+    1420px 200px,
+    1540px 80px;
+}
+
+/* ===============================================================
+   Moon
+================================================================ */
+.moon {
+  position: absolute;
+  top: 12%;
+  left: 75%;
+  width: var(--moon-size);
+  height: var(--moon-size);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fffce8, var(--moon-color));
+  box-shadow:
+    0 0 18px var(--moon-glow),
+    0 0 60px var(--moon-glow);
+}
+
+.moon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 20px at 40% 45%, rgba(0,0,0,0.15), transparent),
+    radial-gradient(circle 12px at 60% 30%, rgba(0,0,0,0.10), transparent),
+    radial-gradient(circle 15px at 55% 60%, rgba(0,0,0,0.18), transparent),
+    radial-gradient(circle 10px at 35% 70%, rgba(0,0,0,0.12), transparent);
+  mix-blend-mode: soft-light;
+  opacity: 0.4;
+}
+
+/* ===============================================================
+   Reveal overlay
 ================================================================ */
 .reveal-mask {
-    position: absolute;
-    inset: 0;
-    background: var(--reveal-overlay-color);
-    z-index: 2;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  background: var(--reveal-overlay-color);
 
-    
-    mask-image: radial-gradient(
-        circle var(--reveal-radius) at var(--x) var(--y),
-        transparent 0,
-        transparent calc(var(--reveal-radius) * 1),
-        black var(--reveal-softness)
-    );
+  mask-image: radial-gradient(
+    circle var(--reveal-radius) at var(--x) var(--y),
+    transparent 0,
+    transparent var(--reveal-radius),
+    black var(--reveal-softness)
+  );
 
-    /* Safari/WebKit version */
-    -webkit-mask-image: radial-gradient(
-        circle var(--reveal-radius) at var(--x) var(--y),
-        transparent 0,
-        transparent calc(var(--reveal-radius) * 1),
-        black var(--reveal-softness)
-    );
+  -webkit-mask-image: radial-gradient(
+    circle var(--reveal-radius) at var(--x) var(--y),
+    transparent 0,
+    transparent var(--reveal-radius),
+    black var(--reveal-softness)
+  );
 
-    transition: mask-image 0.1s linear, -webkit-mask-image 0.1s linear;
+  transition: opacity 0.8s ease;
+}
+
+/* ===============================================================
+   Scrolling content
+================================================================ */
+.page {
+  position: relative;
+  z-index: 3;
+}
+
+/* Hero */
+.hero {
+  min-height: 90vh;
+  margin-bottom: 30vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+/* Content blocks */
+.block {
+  min-height: 70vh;
+  margin: 20vh 0;
+  padding: 6rem 12vw;
+  display: grid;
+  align-items: center;
+  gap: 3rem;
+
+  animation: floatSlow 24s ease-in-out infinite;
+}
+
+.block:nth-of-type(2) { animation-duration: 28s; }
+.block:nth-of-type(3) { animation-duration: 22s; }
+.block:nth-of-type(4) { animation-duration: 30s; }
+
+.block img {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Layout variants */
+.left {
+  grid-template-columns: auto 1fr;
+}
+
+.right {
+  grid-template-columns: 1fr auto;
+}
+
+.center {
+  place-items: center;
+  text-align: center;
+}
+
+.split {
+  grid-template-columns: auto 1fr auto;
+  place-items: center;
+}
+
+/* ===============================================================
+   Floating animation 
+================================================================ */
+@keyframes floatSlow {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
 }
 
 
 /* ===============================================================
-   top
+   Final section (overlay disappears)
 ================================================================ */
-.reveal-content {
-    position: relative;
-    z-index: 3;
-    padding: var(--padding-main);
-    color: var(--content-color);
-    font-family: var(--font-main);
+.reveal-end {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.reveal-end-active ~ .reveal-mask {
+  opacity: 0;
+}
+
+body.reveal-finished .reveal-mask {
+  opacity: 0;
+  pointer-events: none;
 }
