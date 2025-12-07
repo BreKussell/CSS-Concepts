@@ -250,7 +250,7 @@ body {
   align-items: center;
   gap: 3rem;
 
-  animation: floatSlow 24s ease-in-out infinite;
+  animation: floatSlow 15s ease-in-out infinite;
 }
 
 .block:nth-of-type(2) { animation-duration: 28s; }
@@ -282,7 +282,7 @@ body {
 }
 
 /* ===============================================================
-   Floating animation 
+   Subtle Floating animation 
 ================================================================ */
 @keyframes floatSlow {
   0%   { transform: translateY(0); }
